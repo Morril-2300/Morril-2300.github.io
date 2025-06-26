@@ -1,0 +1,478 @@
+* {
+  font-size: medium;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input[type=text],
+input[type=number],
+textarea {
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+input[type=text],
+input[type=number] {
+  height: 25px;
+}
+textarea {
+  resize: none;
+  scrollbar-width: thin;
+}
+textarea::-webkit-scrollbar {
+  width: 8px;
+  background: #f1f1f1;
+  }
+
+output {
+  font-family: monospace;
+  width: 3ch;
+  font-size: medium;
+
+}
+label {
+  font-variant: small-caps;
+  height: min-content;
+  font-size: x-small;
+  text-align: start;
+  padding-left: 2px;
+  vertical-align: top;
+}
+
+label.link {
+  text-decoration: underline;
+  color: #33c;
+  cursor: pointer;
+}
+label.link:hover {
+  color: #009;
+}
+
+.title {
+  font-family: sans-serif;
+  font-weight: 300;
+  width: max-content;
+  background: #663366;
+  font-variant: small-caps;
+  font-size: larger;
+  border-radius: 4px;
+  text-align: center;
+  padding: 5px 10px 0px 10px;
+  color: white;
+}
+
+.button-like,
+.exportButton {
+  font-variant: small-caps;
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-family: sans-serif;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-align: center;
+  background-color: #ff9933;
+  border: 1px solid #f2673a;
+}
+.exportButton {
+  background-color: #38a64e;
+  border: 1px solid #29665d;
+}
+
+.button-like:hover {
+  background-color: #f2673a;
+}
+.exportButton:hover {
+  background-color: #29665d;
+}
+
+/**************************************
+**************************************/
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 1rem;
+  background: #f0f0f0;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+}
+.top .buttons {
+  justify-self: right;
+}
+
+.sheet {
+  background: white;
+  padding: 15px 20px 20px 20px;
+  max-width: 1000px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.char-header {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  grid-gap: 10px;
+}
+.char-header div[name=left] {
+  width: 99%;
+  justify-self: left;
+}
+.char-header div[name=right] {
+  width: 99%;
+  justify-self: right;
+  bottom: 0;
+}
+
+.char_info {
+  display: grid;
+  grid-template-columns: 3fr 3fr 1fr;
+}
+.char_info div {
+  width: 95%;
+}
+
+.level input {
+  align-self: center;
+  font-variant-numeric: tabular-nums;
+}
+.level div label {
+  text-align: right;
+  font-size: medium;
+  vertical-align: bottom;
+}
+.level div {
+  display: flex;
+  flex-direction: row;
+}
+.level div input {
+  justify-self: right;
+  text-align: right;
+  font-size: 10xp;
+  height: 20px;
+  width: 20px;
+  margin-left: 10px;
+}
+
+.survivability {
+  padding-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  row-gap: 1px;
+}
+.survivability div {
+  width: 90%;
+}
+
+/***********************************************************************************************
+
+MAIN BLOCK
+
+***********************************************************************************************/
+
+.main {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  width: 100%;
+}
+
+.attacks,
+.char-header {
+  padding: 10px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  width: 100%;
+  flex-grow: 1;
+}
+.char-header {
+  padding-bottom: 0;
+}
+
+.attributes {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  width: 100%;
+  align-items: stretch;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.attributes .column {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  height: 100%;
+}
+
+.attr-col,
+.attr-col-extra {
+  display: flex;
+  flex-direction: column;
+  padding: 2px 5px 0 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  width: 100%;
+  flex-grow: 1;
+}
+.attr-col > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 0;
+}
+.attr-col label {
+  flex: 1;
+  text-align: left;
+}
+.attr-col input,
+.attr-col output {
+  flex: 0 0 auto;
+  text-align: right;
+  min-width: 3ch;
+  max-width: 20px;
+}
+.attr-col input[type="number"] {
+  text-align: center;
+}
+.attr label {
+  font-weight: 800;
+}
+
+.saving-throw label {
+  font-variant: normal;
+  font-weight: 100;
+}
+
+.skill label {
+  font-size: xx-small;
+}
+input.skillprof,
+.saving-throw input {
+  align-self: center;
+  justify-self: center;
+  width: 10px;
+  height: 14px;
+  font-size: 10px;
+  margin-right: 0px;
+  padding-right: 0px;
+  margin-left: 2px;
+}
+
+.inspiration {
+  display: flex;
+  flex-direction: column;
+}
+.inspiration label {
+  font-size: medium;
+  text-align: center;
+}
+.inspiration input {
+  align-self: center;
+  width: 28px;
+  height: 28px;
+}
+
+
+.attr-extra {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.attr-extra div input,
+.attr-extra div textarea {
+  padding: 0 1px;
+  font-size: x-small;
+}
+.attr-extra div input {
+  text-align: center;
+}
+
+.attr-col-extra {
+  background: hsla(305, 100%, 50%, 0.05);
+}
+.attr-col:nth-child(4) {
+  background: hsla(0, 100%, 50%, 0.05);
+}
+.attr-col:nth-child(5) {
+  background: hsla(43, 100%, 50%, 0.05);
+}
+.attr-col:nth-child(6) {
+  background: hsla(64, 100%, 50%, 0.05);
+}
+.attr-col:nth-child(1) {
+  background: hsla(128, 100%, 50%, 0.05);
+}
+.attr-col:nth-child(2) {
+  background: hsla(171, 100%, 50%, 0.05);
+}
+.attr-col:nth-child(3) {
+  background: hsla(213, 100%, 50%, 0.05);
+}
+
+.info {
+  padding-left: 5px;
+}
+.personality,
+.all_features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
+}
+
+.attacks {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.attacks label {
+  font-size: medium;
+}
+
+.atk-list div {
+  display: grid;
+  grid-template-columns: 22px 22px 3fr 1fr 2fr 3fr;
+  column-gap: 10px;
+}
+.remove,
+.remove-atk {
+  text-align: center;
+  align-self: center;
+}
+.remove-atk,
+.add-atk {
+  width: 24px;
+  margin-left: 2px;
+  cursor: pointer;
+}
+
+.atk-list div label {
+  font-size: small;
+  padding-bottom: 2px;
+}
+.atk-list div label {
+  text-decoration: underline;
+}
+
+.notes,
+.proficiencies {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
+}
+
+.inventory {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  column-gap: 5px;
+  height: 100%;
+}
+
+.currency,
+.equipment,
+.add_notes {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  height: 100%;
+}
+
+.currency_list {
+  border: 1px solid #888;
+  border-radius: 2px;
+  box-sizing: border-box;
+  padding: 2px;
+  width: 100%;
+  flex: 1;
+}
+
+.single_currency {
+  display: grid;
+  grid-template-columns: 1fr 8fr;
+  align-items: center;
+  padding-bottom: 2px;
+  height: 19%;
+  flex: 1;
+}
+.single_currency label {
+  display: flex;
+  align-items: center;  /* vertical centering */
+  font-size: x-small;
+  height: 100%;
+  padding-right: 2px;
+}
+.single_currency input {
+  width: 50px;
+  height: 80%;
+  justify-self: right;
+}
+
+
+/* 
+    SPELLCSATING (PAGE 2)
+*/
+
+.spellcasting label.section-title {
+  font-size: larger;
+}
+
+.spellcasting-header {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr;
+}
+
+.slot-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.slot-row label {
+  width: 40px;
+}
+
+.spell-list div label.center {
+  text-align: center;
+
+}
+.spell-list > div{
+  display: grid;
+  grid-template-columns: 20px 20px 20px 20px 5fr 1fr 1fr 20px 20px 20px 20px 20px 3fr 8fr 15px;
+}
+
+.spell-list > div > input[type="text"],
+.spell-list > div > input[type="number"] {
+  box-sizing: border-box;
+  font-family:monospace;
+}
+
+.spell label {
+  font-size: medium;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.spell-list > div > input.name,
+.spell-list > div > input.effect,
+.spell-list > div > input.notes {
+  font-size: small;
+}

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="style.css">
+  <title>Morril's 5e Sheet</title>
+</head>
+
+<body>
+  <!-- Page 1: Full Sheet (without Spellcasting) -->
+  <div class="sheet page1">
+
+    <div class="top">
+      <div class="title">
+        Morril's DnD 5e character Sheet
+      </div>
+      <div class="buttons">
+        <button class="exportButton" onclick="exportCharacter()">
+          Export Character
+        </button>
+        <input type="file" id="importButton" accept=".json" style="display: none;" />
+        <label for="importButton" class="button-like">Import Character</label>
+      </div>
+    </div>
+
+    <header class="char-header">
+      <div name="left">
+        <div class="char_info">
+          <div id="character">
+            <textarea rows="2" id="charName" placeholder="Character Name"></textarea>
+            <label>Character Name</label>
+          </div>
+          <div id="class">
+            <textarea rows="2" id="charClass" placeholder="Class & Subclass"></textarea>
+            <label>Class & Subclass</label>
+          </div>
+          <div class="level">
+            <div><label>Level</label> <input type="number" id="level" value="1" /></div>
+            <input id="xp" type="number" placeholder="XP" value="0" />
+            <label>XP</label>
+          </div>
+          <div id="background">
+            <textarea rows="1" id="charBackground" placeholder="Background"></textarea>
+            <label>Background</label>
+          </div>
+          <div id="lineage">
+            <textarea rows="1" id="charLineage" placeholder="Lineage"></textarea>
+            <label>Lineage</label>
+          </div>
+          <div>
+            <input id="proficiency-bonus" type="number" value="2" />
+            <label>Proficiency</label>
+          </div>
+        </div>
+      </div>
+      <div class="survivability" name="right">
+        <div><input id="ac" type="text" /><label class="link" onclick="wikidot('armor')">Armor Class </label></div>
+        <div><input id="hpMax" type="number" /><label>Hit Point Max</label></div>
+        <div><input id="hitDice" type="text" /><label>Hit Dice Max</label></div>
+        <div><input id="save0" type="checkbox" /><input id="save1" type="checkbox" /><input id="save2"
+            type="checkbox" /><br /><label>† save</label></div>
+        <div><input id="hpTemp" type="number" /><label>Temporary HP</label></div>
+        <div><input id="hpCur" type="number" /><label>Current HP</label></div>
+        <div><input id="hitDiceExp" type="text" /><label>Spent</label></div>
+        <div><input id="fail0" type="checkbox" /><input id="fail1" type="checkbox" /><input id="fail2"
+            type="checkbox" /><br /><label>† fail</label></div>
+      </div>
+    </header>
+
+    <section class="main">
+      <section class="attributes">
+        <div class="column">
+          <div class="attr-col-extra">
+            <div class="inspiration">
+              <label>Inspiration</label><input id="inspo" type="checkbox" />
+            </div>
+            <div class="attr-extra">
+              <div><input class="fixfont" id="initiative" type="text" /><label>Init.</label></div>
+              <div><input class="fixfont" id="passive_perception" type="text" /><label>PPerc.</label></div>
+              <div><textarea id="speed" rows="2"></textarea><label>Speed</label></div>
+              <div><textarea id="size" rows="2"></textarea><label>Size</label></div>
+            </div>
+          </div>
+          <div class="attr-col-extra">
+            <div class="attr-extra">
+              <div><input class="fixfont" id="weight" type="text" /><label>Weight</label></div>
+              <div><input class="fixfont" id="age" type="text" /><label>Age</label></div>
+            </div>
+          </div>
+          <div class="attr-col">
+            <div class="attr">
+              <label>STR</label>
+              <input type="number" class="ability_score" id="score_str" value="10" />
+              <output class="mod" id="mod_str">+0</output>
+            </div>
+            <div class="saving-throw">
+              <label>Save</label>
+              <input type="checkbox" id="prof_str" />
+              <output class="saving_throw" id="save_str">+0</output>
+            </div>
+            <div class="skill"><label>Athletics </label> <input class="skillprof" value="0" type="number"
+                id="prof_Athletics" /> <output class="skill" id="skill_Athletics">+0</output></div>
+          </div>
+          <div class="attr-col">
+            <div class="attr">
+              <label>DEX</label>
+              <input type="number" class="ability_score" id="score_dex" value="10" />
+              <output class="mod" id="mod_dex">+0</output>
+            </div>
+            <div class="saving-throw">
+              <label>Save</label>
+              <input type="checkbox" id="prof_dex" />
+              <output class="saving_throw" id="save_dex">+0</output>
+            </div>
+            <div class="skill"><label>Acrobatics</label> <input class="skillprof" value="0" type="number"
+                id="prof_Acrobatics" /> <output class="skill" id="skill_Acrobatics">+0</output></div>
+            <div class="skill"><label>Sleight of Hand </label> <input class="skillprof" value="0" type="number"
+                id="prof_SleightOfHand" /> <output class="skill" id="skill_SleightOfHand">+0</output></div>
+            <div class="skill"><label>Stealth </label> <input class="skillprof" value="0" type="number"
+                id="prof_Stealth" /> <output class="skill" id="skill_Stealth">+0</output></div>
+          </div>
+          <div class="attr-col">
+            <div class="attr">
+              <label>CON</label>
+              <input type="number" class="ability_score" id="score_con" value="10" />
+              <output class="mod" id="mod_con">+0</output>
+            </div>
+            <div class="saving-throw">
+              <label>Save</label>
+              <input type="checkbox" id="prof_con" />
+              <output class="saving_throw" id="save_con">+0</output>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="attr-col">
+            <div class="attr">
+              <label>INT</label>
+              <input type="number" class="ability_score" id="score_int" value="10" />
+              <output class="mod" id="mod_int">+0</output>
+            </div>
+            <div class="saving-throw">
+              <label>Save</label>
+              <input type="checkbox" id="prof_int" />
+              <output class="saving_throw" id="save_int">+0</output>
+            </div>
+            <div class="skill"><label>Arcana </label> <input class="skillprof" value="0" type="number"
+                id="prof_Arcana" /> <output class="skill" id="skill_Arcana">+0</output></div>
+            <div class="skill"><label>History </label> <input class="skillprof" value="0" type="number"
+                id="prof_History" /> <output class="skill" id="skill_History">+0</output></div>
+            <div class="skill"><label>Investigation </label> <input class="skillprof" value="0" type="number"
+                id="prof_Investigation" /> <output class="skill" id="skill_Investigation">+0</output></div>
+            <div class="skill"><label>Nature </label> <input class="skillprof" value="0" type="number"
+                id="prof_Nature" /> <output class="skill" id="skill_Nature">+0</output></div>
+            <div class="skill"><label>Religion </label> <input class="skillprof" value="0" type="number"
+                id="prof_Religion" /> <output class="skill" id="skill_Religion">+0</output></div>
+          </div>
+          <div class="attr-col">
+            <div class="attr">
+              <label>WIS</label>
+              <input type="number" class="ability_score" id="score_wis" value="10" />
+              <output class="mod" id="mod_wis">+0</output>
+            </div>
+            <div class="saving-throw">
+              <label>Save</label>
+              <input type="checkbox" id="prof_wis" />
+              <output class="saving_throw" id="save_wis">+0</output>
+            </div>
+            <div class="skill"><label>Animal Handling </label> <input class="skillprof" value="0" type="number"
+                id="prof_AnimalHandling" /> <output class="skill" id="skill_AnimalHandling">+0</output></div>
+            <div class="skill"><label>Insight </label> <input class="skillprof" value="0" type="number"
+                id="prof_Insight" /> <output class="skill" id="skill_Insight">+0</output></div>
+            <div class="skill"><label>Medicine </label> <input class="skillprof" value="0" type="number"
+                id="prof_Medicine" /> <output class="skill" id="skill_Medicine">+0</output></div>
+            <div class="skill"><label>Perception </label> <input class="skillprof" value="0" type="number"
+                id="prof_Perception" /> <output class="skill" id="skill_Perception">+0</output></div>
+            <div class="skill"><label>Survival </label> <input class="skillprof" value="0" type="number"
+                id="prof_Survival" /> <output class="skill" id="skill_Survival">+0</output></div>
+          </div>
+          <div class="attr-col">
+            <div class="attr">
+              <label>CHA</label>
+              <input type="number" class="ability_score" id="score_cha" value="10" />
+              <output class="mod" id="mod_cha">+0</output>
+            </div>
+            <div class="saving-throw">
+              <label>Save</label>
+              <input type="checkbox" id="prof_cha" />
+              <output class="saving_throw" id="save_cha">+0</output>
+            </div>
+            <div class="skill"><label>Deception </label> <input class="skillprof" value="0" type="number"
+                id="prof_Deception" /> <output class="skill" id="skill_Deception">+0</output></div>
+            <div class="skill"><label>Intimidation </label> <input class="skillprof" value="0" type="number"
+                id="prof_Intimidation" /> <output class="skill" id="skill_Intimidation">+0</output></div>
+            <div class="skill"><label>Performance </label> <input class="skillprof" value="0" type="number"
+                id="prof_Performance" /> <output class="skill" id="skill_Performance">+0</output></div>
+            <div class="skill"><label>Persuasion </label> <input class="skillprof" value="0" type="number"
+                id="prof_Persuasion" /> <output class="skill" id="skill_Persuasion">+0</output></div>
+          </div>
+        </div>
+
+
+      </section>
+      <section class="info">
+        <div class="personality">
+          <div><textarea id="personality" rows="3"></textarea><label>Personality Traits</label></div>
+          <div><textarea id="ideals" rows="3"></textarea><label>Ideals</label></div>
+          <div><textarea id="bonds" rows="3"></textarea><label>Bonds</label></div>
+          <div><textarea id="flaws" rows="3"></textarea><label>Flaws</label></div>
+        </div>
+        <div class="all_features">
+          <div class="class_features">
+            <textarea id="class_features" rows="19" placeholder="Class Features, Abilities, Feats"></textarea>
+            <label>Class Features</label>
+          </div>
+          <div class="features">
+            <textarea id="other_features" rows="19" placeholder="Background, Lineage, ... "></textarea>
+            <label>Other Features & Traits</label>
+          </div>
+        </div>
+      </section>
+    </section>
+
+
+
+    <section class="attacks">
+      <label>Attacks & Spellcasting</label>
+      <div class="atk-list" id="atk-list">
+        <div class="atk-header">
+          <label>[-]</label>
+          <label>[+]</label>
+          <label>Name</label>
+          <label>AtkBonus/DC</label>
+          <label>Damage&Type</label>
+          <label>Notes</label>
+        </div>
+        <div class="attack">
+          <whitespace class="rm-atk"></whitespace>
+          <button type="button" class="add-atk">+</button>
+          <input id="atk_name0" type="text" />
+          <input id="atk_bonus0" type="text" />
+          <input id="atk_dmg0" type="text" />
+          <input id="atk_note0" type="text" />
+        </div>
+      </div>
+    </section>
+
+    <section class="proficiencies">
+      <div>
+        <textarea id="proficiencies" rows="10" placeholder="Armor, Shields, Tools and Weapons"></textarea>
+        <label>Proficiencies</label>
+      </div>
+      <div>
+        <textarea id="atk_notes" rows="10" placeholder="Extra attack/spell info..."></textarea>
+        <label>Extra Attack/Spell Info</label>
+      </div>
+    </section>
+
+    <section class="notes">
+      <div class="inventory">
+        <div class="currency">
+          <div class="currency_list">
+            <div class="single_currency"><label>CP</label><input id="cp" type="text" placeholder="CP" /></div>
+            <div class="single_currency"><label>SP</label><input id="sp" type="text" placeholder="SP" /></div>
+            <div class="single_currency"><label>EP</label><input id="ep" type="text" placeholder="EP" /></div>
+            <div class="single_currency"><label>GP</label><input id="gp" type="text" placeholder="GP" /></div>
+            <div class="single_currency"><label>PP</label><input id="pp" type="text" placeholder="PP" /></div>
+          </div>
+          <label class="link" onclick="wikidot('currency')">Currency</label>
+        </div>
+        <div class="equipment">
+          <textarea id="equipment" rows="10" placeholder="All Items, Weapons, etc."></textarea>
+          <label>Equipment</label>
+        </div>
+      </div>
+      <div class="add_notes">
+        <textarea id="add_notes" rows="10" placeholder="Allies, organizations, etc."></textarea>
+        <label>Additional Notes</label>
+      </div>
+    </section>
+  </div>
+
+  <div class="sheet spellcasting">
+    <label class="section-title">Spellcasting</label>
+
+    <div class="spellcasting-header">
+      <div>
+        <div>
+          <input type="text" id="spellcasting_ability" />
+          <label>Spellcasting Ability</label>
+        </div>
+        <div>
+          <input type="text" id="spell_attack_mod" placeholder="Prof + SpellAbility Mod"/>
+          <label>Spell Attack Modifier</label>
+        </div>
+        <div>
+          <input type="text" id="spell_save_dc" placeholder="8 + Prof + SpellAbility Mod"/>
+          <label>Spell Save DC</label>
+        </div>
+      </div>
+      <div>
+        <div class="spell-slot">
+          <input type="text" id="slots_1" placeholder="current / expended"/>
+          <label>1st Level Spell Slots</label>
+        </div>
+        <div class="spell-slot">
+          <input type="text" id="slots_2" placeholder="current / expended"/>
+          <label>2nd Level Spell Slots</label>
+        </div>
+        <div class="spell-slot">
+          <input type="text" id="slots_3" placeholder="current / expended"/>
+          <label>3rd Level Spell Slots</label>
+        </div>
+      </div>
+      <div>
+        <div class="spell-slot">
+          <input type="text" id="slots_4" placeholder="current / expended"/>
+          <label>4th Level Spell Slots</label>
+        </div>
+        <div class="spell-slot">
+          <input type="text" id="slots_5" placeholder="current / expended"/>
+          <label>5th Level Spell Slots</label>
+        </div>
+        <div class="spell-slot">
+          <input type="text" id="slots_6" placeholder="current / expended"/>
+          <label>6th Level Spell Slots</label>
+        </div>
+      </div>
+      <div>
+        <div class="spell-slot">
+          <input type="text" id="slots_7" placeholder="current / expended"/>
+          <label>7th Level Spell Slots</label>
+        </div>
+        <div class="spell-slot">
+          <input type="text" id="slots_8" placeholder="current / expended"/>
+          <label>8th Level Spell Slots</label>
+        </div>
+        <div class="spell-slot">
+          <input type="text" id="slots_9" placeholder="current / expended"/>
+          <label>9th Level Spell Slots</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spell List (from 2014 sheet) -->
+    <div class="spell-list" id="spell-list">
+      <div class="spell-header">
+        <label class="center">[-]</label>
+        <label class="center">[+]</label>
+        <label class="center">prep</label>
+        <label class="center">lvl</label>  
+        <label>Name</label>
+        <label>Time</label>
+        <label>Dur.</label>
+        <label class="center">C</label>
+        <label class="center">R</label>
+        <label class="center">S</label>
+        <label class="center">V</label>
+        <label class="center">M</label>
+        <label>Effect</label>
+        <label>Notes</label>
+        <label class="center"></label>
+      </div>
+      <div class="spell">
+        <whitespace class="rm-spell"></whitespace>
+        <button class="add-spell">+</button>
+        <input class="prep" type="checkbox" id="prep_0"/>
+        <input class="lvl" type="number" id="lvl_0"/>
+        <input class="name" type="text" id="name_0"/>
+        <input class="time" type="text" id="time_0"/>
+        <input class="dur" type="text" id="dur_0"/>
+        <input class="conc" type="checkbox" id="conc_0"/>
+        <input class="ritual" type="checkbox" id="ritual_0"/>
+        <input class="component_s" type="checkbox" id="component_s_0"/>
+        <input class="component_v" type="checkbox" id="component_v_0"/>
+        <input class="component_m" type="checkbox" id="component_m_0"/>
+        <input class="effect" type="text" id="effect_0"/>
+        <input class="notes" type="text" id="notes_0"/>
+        <label class="link" onclick="spellInfo(this)">?</label>
+      </div>
+    </div>
+  </div>
+
+
+
+</body>
+<footer>
+  <script src="script.js"></script>
+</footer>
+
+</html>
