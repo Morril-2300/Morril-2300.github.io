@@ -48,7 +48,7 @@
             <label>Lineage</label>
           </div>
           <div>
-            <input id="proficiency-bonus" type="number" value="2" />
+            <input class="profbonus" id="proficiency-bonus" type="number" value="2" />
             <label>Proficiency</label>
           </div>
         </div>
@@ -87,7 +87,7 @@
               <div><input class="fixfont" id="age" type="text" /><label>Age</label></div>
             </div>
           </div>
-          <div class="attr-col">
+          <div class="attr-col str">
             <div class="attr">
               <label>STR</label>
               <input type="number" class="ability_score" id="score_str" value="10" />
@@ -95,13 +95,13 @@
             </div>
             <div class="saving-throw">
               <label>Save</label>
-              <input type="checkbox" id="prof_str" />
-              <output class="saving_throw" id="save_str">+0</output>
+              <input type="checkbox" id="save_prof_str" />
+              <output class="saving_throw" id="save_mod_str">+0</output>
             </div>
             <div class="skill"><label>Athletics </label> <input class="skillprof" value="0" type="number"
                 id="prof_Athletics" /> <output class="skill" id="skill_Athletics">+0</output></div>
           </div>
-          <div class="attr-col">
+          <div class="attr-col dex">
             <div class="attr">
               <label>DEX</label>
               <input type="number" class="ability_score" id="score_dex" value="10" />
@@ -109,8 +109,8 @@
             </div>
             <div class="saving-throw">
               <label>Save</label>
-              <input type="checkbox" id="prof_dex" />
-              <output class="saving_throw" id="save_dex">+0</output>
+              <input type="checkbox" id="save_prof_dex" />
+              <output class="saving_throw" id="save_mod_dex">+0</output>
             </div>
             <div class="skill"><label>Acrobatics</label> <input class="skillprof" value="0" type="number"
                 id="prof_Acrobatics" /> <output class="skill" id="skill_Acrobatics">+0</output></div>
@@ -119,7 +119,7 @@
             <div class="skill"><label>Stealth </label> <input class="skillprof" value="0" type="number"
                 id="prof_Stealth" /> <output class="skill" id="skill_Stealth">+0</output></div>
           </div>
-          <div class="attr-col">
+          <div class="attr-col con">
             <div class="attr">
               <label>CON</label>
               <input type="number" class="ability_score" id="score_con" value="10" />
@@ -127,13 +127,13 @@
             </div>
             <div class="saving-throw">
               <label>Save</label>
-              <input type="checkbox" id="prof_con" />
-              <output class="saving_throw" id="save_con">+0</output>
+              <input type="checkbox" id="save_prof_con" />
+              <output class="saving_throw" id="save_mod_con">+0</output>
             </div>
           </div>
         </div>
         <div class="column">
-          <div class="attr-col">
+          <div class="attr-col int">
             <div class="attr">
               <label>INT</label>
               <input type="number" class="ability_score" id="score_int" value="10" />
@@ -141,8 +141,8 @@
             </div>
             <div class="saving-throw">
               <label>Save</label>
-              <input type="checkbox" id="prof_int" />
-              <output class="saving_throw" id="save_int">+0</output>
+              <input type="checkbox" id="save_prof_int" />
+              <output class="saving_throw" id="save_mod_int">+0</output>
             </div>
             <div class="skill"><label>Arcana </label> <input class="skillprof" value="0" type="number"
                 id="prof_Arcana" /> <output class="skill" id="skill_Arcana">+0</output></div>
@@ -155,7 +155,7 @@
             <div class="skill"><label>Religion </label> <input class="skillprof" value="0" type="number"
                 id="prof_Religion" /> <output class="skill" id="skill_Religion">+0</output></div>
           </div>
-          <div class="attr-col">
+          <div class="attr-col wis">
             <div class="attr">
               <label>WIS</label>
               <input type="number" class="ability_score" id="score_wis" value="10" />
@@ -163,8 +163,8 @@
             </div>
             <div class="saving-throw">
               <label>Save</label>
-              <input type="checkbox" id="prof_wis" />
-              <output class="saving_throw" id="save_wis">+0</output>
+              <input type="checkbox" id="save_prof_wis" />
+              <output class="saving_throw" id="save_mod_wis">+0</output>
             </div>
             <div class="skill"><label>Animal Handling </label> <input class="skillprof" value="0" type="number"
                 id="prof_AnimalHandling" /> <output class="skill" id="skill_AnimalHandling">+0</output></div>
@@ -177,7 +177,7 @@
             <div class="skill"><label>Survival </label> <input class="skillprof" value="0" type="number"
                 id="prof_Survival" /> <output class="skill" id="skill_Survival">+0</output></div>
           </div>
-          <div class="attr-col">
+          <div class="attr-col cha">
             <div class="attr">
               <label>CHA</label>
               <input type="number" class="ability_score" id="score_cha" value="10" />
@@ -185,8 +185,8 @@
             </div>
             <div class="saving-throw">
               <label>Save</label>
-              <input type="checkbox" id="prof_cha" />
-              <output class="saving_throw" id="save_cha">+0</output>
+              <input type="checkbox" id="save_prof_cha" />
+              <output class="saving_throw" id="save_mod_cha">+0</output>
             </div>
             <div class="skill"><label>Deception </label> <input class="skillprof" value="0" type="number"
                 id="prof_Deception" /> <output class="skill" id="skill_Deception">+0</output></div>

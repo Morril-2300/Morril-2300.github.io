@@ -101,7 +101,6 @@ let spellIndex =1;
 
 function main() {
   getData();
-  getAbilities();
   calcAndWriteAbilities();
 }
 
@@ -179,10 +178,11 @@ function writeAbilities() {
   for (let i = 0; i < abilities.length; i++) {
     const ability = abilities[i];
     const mod = characterData.abilityMods[i];
-    const save = characterData.saveMods[i];
+    const save_mod = characterData.saveMods[i];
     document.getElementById("score_" + ability).value = characterData.abilityScores[i];
     document.getElementById("mod_" + ability).value = (mod >= 0 ? "+" : "") + mod;
-    document.getElementById("save_" + ability).value = (save >= 0 ? "+" : "") + save;
+    document.getElementById("save_mod_" + ability).value = (save_mod >= 0 ? "+" : "") + save_mod;
+    document.getElementById("save_prof_" + ability).checked = characterData.saveProficiency[i];
     
     for (let j = 0; j < skills[i].length; j++) {
       const skill = skills[i][j];
@@ -276,11 +276,11 @@ function calcAndWriteAbilities() {
     document.getElementById("mod_" + ability).value =
       (mod >= 0 ? "+" : "") + mod;
     // calc save
-    const saveProf = document.getElementById("prof_" + ability).checked;
+    const saveProf = document.getElementById("save_prof_" + ability).checked;
     characterData.saveProficiency[i] = saveProf;
     const saveMod = mod + saveProf * characterData.profBonus;
     characterData.saveMods[i] = saveMod;
-    document.getElementById("save_" + ability).value = 
+    document.getElementById("save_mod_" + ability).value = 
       (saveMod >= 0 ? "+" : "") + saveMod;
     // calc skills
     for (let j = 0; j < skills[i].length; j++) {
@@ -346,7 +346,7 @@ function writeAttacks() {
   const data = characterData.attacks;
   const atkList = document.getElementById("atk-list");
 
-  if (data.length != 0) {
+  if (data != null && data.length != 0) {
     atkList.querySelectorAll(".attack").forEach(el => el.remove());
     data.forEach((item, i) => {
       const row = createAttackRow(i, i === 0, item);
@@ -395,7 +395,7 @@ function writeSpells() {
   const data = characterData.spells;
   const spellList = document.getElementById("spell-list");
 
-  if (data.length != 0) {
+  if (data != null && data.length != 0) {
     spellList.querySelectorAll(".spell").forEach(el => el.remove());
     data.forEach((item, i) => {
       const row = createSpellRow(i, i === 0, item);
@@ -438,10 +438,10 @@ document.addEventListener("DOMContentLoaded", function () {
     input.addEventListener('change', main);
   });
 
-  attachAttackEventListeners();
   loadAttacksFromStorage();
-  attachSpellEventListeners();
+  attachAttackEventListeners();
   loadSpellsFromStorage();
+  attachSpellEventListeners();
 });
 
 
@@ -487,20 +487,35 @@ function createSpellRow(index, isFirst = false, data = []) {
     ${isFirst ? '<whitespace class="rm-spell"></whitespace>' :
       '<button type="button" class="remove-spell">-</button>'}
     <button class="add-spell">+</button>
-    <input value="${data[ 0]       }" class="prep" type="checkbox" id="prep_${index}"/>
-    <input value="${data[ 1]       }" class="lvl" type="number" id="lvl_${index}"/>
-    <input value="${data[ 2] || '' }" class="name" type="text" id="name_${index}"/>
-    <input value="${data[ 3] || '' }" class="time" type="text" id="time_${index}"/>
-    <input value="${data[ 4] || '' }" class="dur" type="text" id="dur_${index}"/>
-    <input value="${data[ 5]       }" class="conc" type="checkbox" id="conc_${index}"/>
-    <input value="${data[ 6]       }" class="ritual" type="checkbox" id="ritual_${index}"/>
-    <input value="${data[ 7]       }" class="component_s" type="checkbox" id="component_s_${index}"/>
-    <input value="${data[ 8]       }" class="component_v" type="checkbox" id="component_v_${index}"/>
-    <input value="${data[ 9]       }" class="component_m" type="checkbox" id="component_m_${index}"/>
-    <input value="${data[10] || '' }" class="effect" type="text" id="effect_${index}"/>
-    <input value="${data[11] || '' }" class="notes" type="text" id="notes_${index}"/>
+    <input class="prep" type="checkbox" id="prep_${index}"/>
+    <input value="${data[ 1] || 0}" class="lvl" type="number" id="lvl_${index}"/>
+    <input value="${data[ 2] ||''}" class="name" type="text" id="name_${index}"/>
+    <input value="${data[ 3] ||''}" class="time" type="text" id="time_${index}"/>
+    <input value="${data[ 4] ||'' }" class="dur" type="text" id="dur_${index}"/>
+    <input class="conc" type="checkbox" id="conc_${index}"/>
+    <input class="ritual" type="checkbox" id="ritual_${index}"/>
+    <input class="component_s" type="checkbox" id="component_s_${index}"/>
+    <input class="component_v" type="checkbox" id="component_v_${index}"/>
+    <input class="component_m" type="checkbox" id="component_m_${index}"/>
+    <input value="${data[10] ||'' }" class="effect" type="text" id="effect_${index}"/>
+    <input value="${data[11] ||'' }" class="notes" type="text" id="notes_${index}"/>
     <label class="link" onclick="spellInfo(this)">?</label>
   `;
+
+  const checkboxes = [
+    ["prep", 0],
+    ["conc", 5],
+    ["ritual", 6],
+    ["component_s", 7],
+    ["component_v", 8],
+    ["component_m", 9],
+  ];
+
+  checkboxes.forEach(([cls, idx]) => {
+    const checkbox = div.querySelector(`.${cls}`);
+    checkbox.checked = !!data[idx]; 
+  });
+
   return div;
 }
 

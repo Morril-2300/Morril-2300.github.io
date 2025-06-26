@@ -10,7 +10,15 @@
       --background: #fff;
       --link-color: #33c;
       --link-hover: #009;
-  }
+
+      --tint-pink:   #ff47f032;
+      --tint-red:    #E4030332;
+      --tint-orange: #FF8C0032;
+      --tint-yellow: #FFED0032;
+      --tint-green:  #00af2c32;
+      --tint-blue:   #004CFF32;
+      --tint-violet: #73298232;
+    } 
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,6 +27,14 @@
       --background: #000;
       --link-color: #88f;
       --link-hover: #33c;
+
+      --tint-pink:   #ff47f064;
+      --tint-red:    #E4030364;
+      --tint-orange: #FF8C0064;
+      --tint-yellow: #FFED0064;
+      --tint-green:  #00af2c64;
+      --tint-blue:   #004CFF64;
+      --tint-violet: #73298264;
   }
 }
 
@@ -217,7 +233,7 @@ body {
 
 .level > input {
   align-self: center;
-  font-variant-numeric: tabular-nums;
+  text-align: right;
 }
 .level > div {
   display: flex;
@@ -239,6 +255,10 @@ body {
   border-style: dashed;
 }
 
+.profbonus {
+  text-align: center;
+}
+
 .survivability {
   margin-top: 15px;
   display: grid;
@@ -248,6 +268,18 @@ body {
 .survivability div {
   width: 90%;
 }
+
+.survivability > div > input#ac,
+.survivability > div > input#hpMax,
+.survivability > div > input#hpTemp,
+.survivability > div > input#hpCur {
+  text-align: center;
+}
+.survivability > div > input#hitDice,
+.survivability > div > input#hitDiceExp {
+  padding-left: 5px;
+}
+
 .death-saves {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -385,26 +417,27 @@ input.skillprof,
 }
 
 .attr-col-extra {
-  background: hsla(305, 100%, 50%, 0.05);
+  background: var(--tint-pink);
 }
-.attr-col:nth-child(4) {
-  background: hsla(0, 100%, 50%, 0.05);
+.attr-col.str {
+  background: var(--tint-red);
 }
-.attr-col:nth-child(5) {
-  background: hsla(43, 100%, 50%, 0.05);
+.attr-col.dex {
+  background: var(--tint-orange);
 }
-.attr-col:nth-child(6) {
-  background: hsla(64, 100%, 50%, 0.05);
+.attr-col.con {
+  background: var(--tint-yellow);
 }
-.attr-col:nth-child(1) {
-  background: hsla(128, 100%, 50%, 0.05);
+.attr-col.int {
+  background: var(--tint-green);
 }
-.attr-col:nth-child(2) {
-  background: hsla(171, 100%, 50%, 0.05);
+.attr-col.wis {
+  background: var(--tint-blue);
 }
-.attr-col:nth-child(3) {
-  background: hsla(213, 100%, 50%, 0.05);
+.attr-col.cha {
+  background: var(--tint-violet);
 }
+
 
 .info {
   padding-left: 5px;
