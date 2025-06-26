@@ -1,6 +1,34 @@
-* {
-  font-size: medium;
+
+:root {
+  color-scheme: light dark;
+  --background: #000;
 }
+
+@media (prefers-color-scheme: light) {
+  :root {
+      --foreground: #000;
+      --background: #fff;
+      --link-color: #33c;
+      --link-hover: #009;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+      --foreground: #ccc;
+      --background: #000;
+      --link-color: #88f;
+      --link-hover: #33c;
+  }
+}
+
+html, body {
+  background-color: var(--background) !important;
+  background: var(--background);
+  width: 100%;
+  height: 100%;
+}
+
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -10,6 +38,21 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
   appearance: textfield;
+}
+textarea::-webkit-scrollbar {
+  width: 8px;
+  background: #f1f1f1;
+}
+
+input, textarea {
+  color: var(--foreground);
+  background-color: var(--background);
+  border: 1px solid var(--foreground);
+  width: 100%;
+  border-radius: 0px;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
 }
 
 input[type=text],
@@ -27,10 +70,30 @@ textarea {
   resize: none;
   scrollbar-width: thin;
 }
-textarea::-webkit-scrollbar {
-  width: 8px;
-  background: #f1f1f1;
-  }
+input[type=checkbox] {
+  padding: 0;
+  margin: 0;
+  width: 20px !important;
+  height: 20px !important;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid var(--foreground);
+  background-color: var(--background);
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+input[type="checkbox"]:checked::before {
+  content: "✓";
+  text-align: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--foreground);
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
 
 output {
   font-family: monospace;
@@ -49,11 +112,11 @@ label {
 
 label.link {
   text-decoration: underline;
-  color: #33c;
+  color: var(--link-color);
   cursor: pointer;
 }
 label.link:hover {
-  color: #009;
+  color: var(--link-hover);
 }
 
 .title {
@@ -115,7 +178,7 @@ body {
 }
 
 .sheet {
-  background: white;
+  background: var(--background);
   padding: 15px 20px 20px 20px;
   max-width: 1000px;
   margin: 20px auto;
@@ -128,7 +191,7 @@ body {
 
 .char-header {
   display: grid;
-  grid-template-columns: 3fr 2fr;
+  grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
 }
 .char-header div[name=left] {
@@ -145,40 +208,56 @@ body {
   display: grid;
   grid-template-columns: 3fr 3fr 1fr;
 }
-.char_info div {
+.char_info > div {
   width: 95%;
 }
+.char_info textarea {
+  min-height: 25px;
+}
 
-.level input {
+.level > input {
   align-self: center;
   font-variant-numeric: tabular-nums;
 }
-.level div label {
+.level > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.level > div > label {
   text-align: right;
-  font-size: medium;
+  font-size: x-small;
   vertical-align: bottom;
 }
-.level div {
-  display: flex;
-  flex-direction: row;
-}
-.level div input {
+.level > div > input {
   justify-self: right;
   text-align: right;
   font-size: 10xp;
-  height: 20px;
+  height: 15px;
   width: 20px;
-  margin-left: 10px;
+  border-style: dashed;
 }
 
 .survivability {
-  padding-top: 18px;
+  margin-top: 15px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   row-gap: 1px;
 }
 .survivability div {
   width: 90%;
+}
+.death-saves {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.death-saves > input {
+  width: 100%;
+  height: 100%;
+}
+.death-saves > label {
+  width: 200%;
 }
 
 /***********************************************************************************************
@@ -288,6 +367,7 @@ input.skillprof,
   align-self: center;
   width: 28px;
   height: 28px;
+  margin-bottom: 5px;
 }
 
 
@@ -334,40 +414,6 @@ input.skillprof,
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 10px;
-}
-
-.attacks {
-  display: grid;
-  grid-template-columns: 1fr;
-}
-
-.attacks label {
-  font-size: medium;
-}
-
-.atk-list div {
-  display: grid;
-  grid-template-columns: 22px 22px 3fr 1fr 2fr 3fr;
-  column-gap: 10px;
-}
-.remove,
-.remove-atk {
-  text-align: center;
-  align-self: center;
-}
-.remove-atk,
-.add-atk {
-  width: 24px;
-  margin-left: 2px;
-  cursor: pointer;
-}
-
-.atk-list div label {
-  font-size: small;
-  padding-bottom: 2px;
-}
-.atk-list div label {
-  text-decoration: underline;
 }
 
 .notes,
@@ -424,6 +470,33 @@ input.skillprof,
 }
 
 
+.attacks {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.attacks label {
+  font-size: medium;
+}
+
+.atk-list div {
+  display: grid;
+  grid-template-columns: 22px 22px 3fr 1fr 2fr 3fr;
+  column-gap: 10px;
+}
+.remove,
+.rm-atk {
+  text-align: center;
+}
+.atk-list div label {
+  font-size: small;
+  padding-bottom: 2px;
+}
+.atk-list div label {
+  text-decoration: underline;
+}
+
+
 /* 
     SPELLCSATING (PAGE 2)
 */
@@ -435,6 +508,7 @@ input.skillprof,
 .spellcasting-header {
   display: grid;
   grid-template-columns: 3fr 1fr 1fr 1fr;
+  gap: 2px;
 }
 
 .slot-row {
@@ -455,12 +529,17 @@ input.skillprof,
 .spell-list > div{
   display: grid;
   grid-template-columns: 20px 20px 20px 20px 5fr 1fr 1fr 20px 20px 20px 20px 20px 3fr 8fr 15px;
+  gap: 2px;
 }
 
 .spell-list > div > input[type="text"],
 .spell-list > div > input[type="number"] {
   box-sizing: border-box;
   font-family:monospace;
+}
+.spell-list > div > input {
+  justify-self: center;
+  align-self: center;
 }
 
 .spell label {
@@ -475,4 +554,23 @@ input.skillprof,
 .spell-list > div > input.effect,
 .spell-list > div > input.notes {
   font-size: small;
+}
+
+.remove-atk,
+.add-atk,
+.remove-spell,
+.add-spell {
+  font-family: monospace;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  align-self: center;
+  justify-self: center;
+  text-align: center;
+  padding: 0;
+  margin: auto;
+  background-color: var(--background);
+  color: var(--foreground);
+  border: 1px solid var(--foreground);
+  border-radius: 2px;
 }
