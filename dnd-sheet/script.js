@@ -69,8 +69,8 @@ let characterData = {
   equipment: "",
 
   attacks: [["","","",""]],
-  //        prep lvl name time dur c     r     s     v     m effect notes 
-  spells: [[false, , "", "", "", false,false,false,false,false, "", ""]],
+  //        prep lvl name time rng c     r     s     v     m  dur effect notes 
+  spells: [[false, , "", "", "", false,false,false,false,false, "", "", ""]],
 
   spellcasting_ability: "",
   spell_attack_mod: "",
@@ -379,6 +379,7 @@ function saveSpellsToStorage() {
       (inputs[ 9].checked),
       (inputs[10]?.value  || ""),
       (inputs[11]?.value  || ""),
+      (inputs[12]?.value  || ""),
     ];
     data.push(spell);
   });
@@ -491,14 +492,15 @@ function createSpellRow(index, isFirst = false, data = []) {
     <input value="${data[ 1] || 0}" class="lvl" type="number" id="lvl_${index}"/>
     <input value="${data[ 2] ||''}" class="name" type="text" id="name_${index}"/>
     <input value="${data[ 3] ||''}" class="time" type="text" id="time_${index}"/>
-    <input value="${data[ 4] ||'' }" class="dur" type="text" id="dur_${index}"/>
+    <input value="${data[ 4] ||'' }" class="range" type="text" id="range_${index}"/>
     <input class="conc" type="checkbox" id="conc_${index}"/>
     <input class="ritual" type="checkbox" id="ritual_${index}"/>
     <input class="component_s" type="checkbox" id="component_s_${index}"/>
     <input class="component_v" type="checkbox" id="component_v_${index}"/>
     <input class="component_m" type="checkbox" id="component_m_${index}"/>
-    <input value="${data[10] ||'' }" class="effect" type="text" id="effect_${index}"/>
-    <input value="${data[11] ||'' }" class="notes" type="text" id="notes_${index}"/>
+    <input value="${data[10] ||'' }" class="dur" type="text" id="dur_${index}"/>
+    <input value="${data[11] ||'' }" class="effect" type="text" id="effect_${index}"/>
+    <input value="${data[12] ||'' }" class="notes" type="text" id="notes_${index}"/>
     <label class="link" onclick="spellInfo(this)">?</label>
   `;
 
@@ -564,13 +566,14 @@ function reindexSpellRows() {
       inputs[ 2].id = `name-${i}`;
       inputs[ 3].id = `time_${i}`;
       inputs[ 4].id = `dur_${i}`;
-      inputs[ 5].id = `conc_${i}`;
+      inputs[ 5].id = `range_${i}`;
       inputs[ 6].id = `ritual_${i}`;
       inputs[ 7].id = `component_s_${i}`;
       inputs[ 8].id = `component_v_${i}`;
       inputs[ 9].id = `component_m_${i}`;
-      inputs[10].id = `effect_${i}`;
-      inputs[11].id = `notes_${i}`;
+      inputs[10].id = `conc_${i}`;
+      inputs[11].id = `effect_${i}`;
+      inputs[12].id = `notes_${i}`;
     }
 
     // Replace/remove first row's remove button

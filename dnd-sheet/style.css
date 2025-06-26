@@ -559,9 +559,9 @@ input.skillprof,
   text-align: center;
 
 }
-.spell-list > div{
+.spell-list > div {
   display: grid;
-  grid-template-columns: 20px 20px 20px 20px 5fr 1fr 1fr 20px 20px 20px 20px 20px 3fr 8fr 15px;
+  grid-template-columns: 20px 20px 20px 20px 5fr 1fr 1fr 20px 20px 20px 20px 20px 1fr 3fr 8fr 15px;
   gap: 2px;
 }
 
@@ -569,10 +569,17 @@ input.skillprof,
 .spell-list > div > input[type="number"] {
   box-sizing: border-box;
   font-family:monospace;
+  font-size: small;
 }
 .spell-list > div > input {
   justify-self: center;
   align-self: center;
+}
+.spell-list > div > .lvl,
+.spell-list > div > .dur,
+.spell-list > div > .time,
+.spell-list > div > .range {
+  text-align: center;
 }
 
 .spell label {
