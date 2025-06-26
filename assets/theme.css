@@ -1,0 +1,148 @@
+* {
+    --black:        	#000000;
+    --grey-dark:    	#404040;
+    --grey-light:   	#808080;
+    --white:        	#ffffff;
+	
+    --red:          	#cc3333;
+    --orange-dark:  	#f2673a;
+    --orange-light: 	#ff9933;
+    --yellow:       	#ffcc00;
+    --green:        	#38a64e;
+    --teal:         	#29665d;
+    --blue:         	#1779a6;
+    --purple:       	#663366;
+}
+
+
+@font-face {
+    font-family: 'Fira Code';
+    src: url('FiraCode-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Fira Code';
+    src: url('FiraCode-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Nerd Fonts Symbols';
+    src: url('NerdFontsSymbolsMono-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    color-scheme: light dark;
+    font-family: 'Fira Code', 'Nerd Fonts Symbols';
+    --title-weight: bold;
+    --header-weight: bold;
+    --header-size: large;
+    --title-size: 3em;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --foreground: var(--green);
+        --background: var(--black);
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --foreground: var(--green);
+        --background: var(--white);
+    }
+}
+
+body,
+html {
+    background-color: var(--background);
+    color: var(--foreground);
+    margin: 0;
+    width: 100%;
+}
+
+hr {
+    border-style: dashed;
+    border-width: 0.1em;
+    border-radius: 100%;
+    border-color: var(--foreground);
+    min-width: none;
+}
+
+.title {
+    font-weight: var(--title-weight);
+    font-size: var(--title-size);
+}
+
+.header {
+    font-weight: var(--header-weight);
+    font-size: var(--header-size);
+    text-decoration: underline;
+}
+
+.page {
+    margin: 3% auto;
+    max-width: fit-content;
+    text-align: center;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+.content > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: left;
+    gap: .5em;
+    flex-wrap: nowrap;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.content > div .header {
+    text-align: left;
+    font-size: x-large;
+}
+
+.content > div > a {
+    flex: none;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    width: fit-content;
+}
+
+.content > div > a > ul {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    gap: 0.5em;
+}
+
+.content > div > a > ul > li {
+    display: inline-block;
+    vertical-align: middle;
+    white-space: nowrap;
+    font-size: larger;
+}
+
+
+a {
+    color: var(--green);
+    text-decoration: none;
+}
