@@ -45,7 +45,7 @@
           </div>
           <div id="lineage">
             <textarea rows="1" id="charLineage" placeholder="Lineage"></textarea>
-            <label>Lineage</label>
+            <label class="link" onclick="lineageInfo()">Lineage</label>
           </div>
           <div>
             <input class="profbonus" id="proficiency-bonus" type="number" value="2" />
@@ -290,8 +290,8 @@
           <label>Spellcasting Ability</label>
         </div>
         <div>
-          <input type="text" id="spell_attack_mod" placeholder="Prof + SpellAbility Mod"/>
-          <label>Spell Attack Modifier</label>
+          <input type="text" id="spell_mod" placeholder="Prof + SpellAbility Mod"/>
+          <label>Spellcasting Modifier</label>
         </div>
         <div>
           <input type="text" id="spell_save_dc" placeholder="8 + Prof + SpellAbility Mod"/>
@@ -300,43 +300,43 @@
       </div>
       <div>
         <div class="spell-slot">
-          <input type="text" id="slots_1" placeholder="current / expended, max. 4"/>
+          <input type="text" id="slots_1" placeholder="current / total, max. 4"/>
           <label>1st Level Spell Slots</label>
         </div>
         <div class="spell-slot">
-          <input type="text" id="slots_2" placeholder="current / expended, max. 3"/>
+          <input type="text" id="slots_2" placeholder="current / total, max. 3"/>
           <label>2nd Level Spell Slots</label>
         </div>
         <div class="spell-slot">
-          <input type="text" id="slots_3" placeholder="current / expended , max. 3"/>
+          <input type="text" id="slots_3" placeholder="current / total , max. 3"/>
           <label>3rd Level Spell Slots</label>
         </div>
       </div>
       <div>
         <div class="spell-slot">
-          <input type="text" id="slots_4" placeholder="current / expended, max. 3"/>
+          <input type="text" id="slots_4" placeholder="current / total, max. 3"/>
           <label>4th Level Spell Slots</label>
         </div>
         <div class="spell-slot">
-          <input type="text" id="slots_5" placeholder="current / expended, max. 3"/>
+          <input type="text" id="slots_5" placeholder="current / total, max. 3"/>
           <label>5th Level Spell Slots</label>
         </div>
         <div class="spell-slot">
-          <input type="text" id="slots_6" placeholder="current / expended, max. 2"/>
+          <input type="text" id="slots_6" placeholder="current / total, max. 2"/>
           <label>6th Level Spell Slots</label>
         </div>
       </div>
       <div>
         <div class="spell-slot">
-          <input type="text" id="slots_7" placeholder="current / expended, max. 2"/>
+          <input type="text" id="slots_7" placeholder="current / total, max. 2"/>
           <label>7th Level Spell Slots</label>
         </div>
         <div class="spell-slot">
-          <input type="text" id="slots_8" placeholder="current / expended, max. 1"/>
+          <input type="text" id="slots_8" placeholder="current / total, max. 1"/>
           <label>8th Level Spell Slots</label>
         </div>
         <div class="spell-slot">
-          <input type="text" id="slots_9" placeholder="current / expended, max. 1"/>
+          <input type="text" id="slots_9" placeholder="current / total, max. 1"/>
           <label>9th Level Spell Slots</label>
         </div>
       </div>
@@ -372,8 +372,8 @@
         <input class="range" type="text" id="range_0"/>
         <input class="conc" type="checkbox" id="conc_0"/>
         <input class="ritual" type="checkbox" id="ritual_0"/>
-        <input class="component_s" type="checkbox" id="component_s_0"/>
         <input class="component_v" type="checkbox" id="component_v_0"/>
+        <input class="component_s" type="checkbox" id="component_s_0"/>
         <input class="component_m" type="checkbox" id="component_m_0"/>
         <input class="dur" type="text" id="dur_0"/>
         <input class="effect" type="text" id="effect_0"/>

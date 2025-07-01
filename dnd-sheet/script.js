@@ -55,6 +55,7 @@ let characterData = {
   speed: "",
   weight: "",
   size: "",
+  age: "",
 
   cp: 0,
   sp: 0,
@@ -73,7 +74,7 @@ let characterData = {
   spells: [[false, , "", "", "", false,false,false,false,false, "", "", ""]],
 
   spellcasting_ability: "",
-  spell_attack_mod: "",
+  spell_mod: "",
   spell_save_dc: "",
 
   spell_slots: ["","","","","","","","",""]
@@ -95,7 +96,7 @@ const levelXP = [
   85000,100000,120000,140000,165000,195000,225000,265000,305000,355000
 ];
 let attackIndex = 1;
-let spellIndex =1;
+let spellIndex = 1;
 
 /* calculations im-&export **********************************************************/
 
@@ -138,6 +139,7 @@ function write() {
   document.getElementById("speed").value = characterData.speed;
   document.getElementById("weight").value = characterData.weight;
   document.getElementById("size").value = characterData.size;
+  document.getElementById("age").value = characterData.age;
 
   document.getElementById("proficiency-bonus").value = characterData.profBonus;
 
@@ -166,7 +168,7 @@ function write() {
   document.getElementById("equipment").value = characterData.equipment;
 
   document.getElementById("spellcasting_ability").value = characterData.spellcasting_ability;
-  document.getElementById("spell_attack_mod").value = characterData.spell_attack_mod;
+  document.getElementById("spell_mod").value = characterData.spell_mod;
   document.getElementById("spell_save_dc").value = characterData.spell_save_dc;
 
   for (let i = 0; i < 9; i++) {
@@ -224,6 +226,7 @@ function getData() {
   characterData.speed = document.getElementById("speed").value;
   characterData.weight = document.getElementById("weight").value;
   characterData.size = document.getElementById("size").value;
+  characterData.age = document.getElementById("age").value;
 
   characterData.personality = document.getElementById("personality").value;
   characterData.ideals = document.getElementById("ideals").value;
@@ -250,7 +253,7 @@ function getData() {
 
 
   characterData.spellcasting_ability = document.getElementById("spellcasting_ability").value;
-  characterData.spell_attack_mod = document.getElementById("spell_attack_mod").value;
+  characterData.spell_mod = document.getElementById("spell_mod").value;
   characterData.spell_save_dc = document.getElementById("spell_save_dc").value;
 
   for (let i = 0; i < 9; i++) {
@@ -495,8 +498,8 @@ function createSpellRow(index, isFirst = false, data = []) {
     <input value="${data[ 4] ||'' }" class="range" type="text" id="range_${index}"/>
     <input class="conc" type="checkbox" id="conc_${index}"/>
     <input class="ritual" type="checkbox" id="ritual_${index}"/>
-    <input class="component_s" type="checkbox" id="component_s_${index}"/>
     <input class="component_v" type="checkbox" id="component_v_${index}"/>
+    <input class="component_s" type="checkbox" id="component_s_${index}"/>
     <input class="component_m" type="checkbox" id="component_m_${index}"/>
     <input value="${data[10] ||'' }" class="dur" type="text" id="dur_${index}"/>
     <input value="${data[11] ||'' }" class="effect" type="text" id="effect_${index}"/>
@@ -508,8 +511,8 @@ function createSpellRow(index, isFirst = false, data = []) {
     ["prep", 0],
     ["conc", 5],
     ["ritual", 6],
-    ["component_s", 7],
-    ["component_v", 8],
+    ["component_v", 7],
+    ["component_s", 8],
     ["component_m", 9],
   ];
 
@@ -568,8 +571,8 @@ function reindexSpellRows() {
       inputs[ 4].id = `dur_${i}`;
       inputs[ 5].id = `range_${i}`;
       inputs[ 6].id = `ritual_${i}`;
-      inputs[ 7].id = `component_s_${i}`;
-      inputs[ 8].id = `component_v_${i}`;
+      inputs[ 7].id = `component_v_${i}`;
+      inputs[ 8].id = `component_s_${i}`;
       inputs[ 9].id = `component_m_${i}`;
       inputs[10].id = `conc_${i}`;
       inputs[11].id = `effect_${i}`;
@@ -655,10 +658,21 @@ function attachSpellEventListeners() {
 
 /* handy functions  ********************************************************************************/
 
+function lineageInfo(element) {
+  let lineage = document.getElementById("charLineage").value;
+  const search = "lineage:" + formatText(lineage);
+  console.log(search);
+  wikidot(search);
+}
 function spellInfo(element) {
   let spellName = element.parentElement.querySelector('.name').value;
-  const search = "spell:" + spellName.replace("'", "").replace(" ","-").toLowerCase();
+  const search = "spell:" + formatText(spellName);
   wikidot(search);
+}
+
+function formatText(str) {
+  str.replace()
+  return str.replace(/[^a-zA-Z0-9\s]/gm, "").replace(/\s/gm,"-").toLowerCase();
 }
 
 function wikidot(param) {
