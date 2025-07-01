@@ -52,6 +52,7 @@ let characterData = {
   inspo: false,
   
   initiative: 0,
+  passive_perception: "",
   speed: "",
   weight: "",
   size: "",
@@ -136,6 +137,7 @@ function write() {
   document.getElementById("inspo").checked = characterData.inspo;
 
   document.getElementById("initiative").value = characterData.initiative;
+  document.getElementById("passive_perception").value = characterData.passive_perception;
   document.getElementById("speed").value = characterData.speed;
   document.getElementById("weight").value = characterData.weight;
   document.getElementById("size").value = characterData.size;
@@ -223,6 +225,7 @@ function getData() {
   characterData.inspo = document.getElementById("inspo").checked;
 
   characterData.initiative = document.getElementById("initiative").value;
+  characterData.passive_perception = document.getElementById("passive_perception").value;
   characterData.speed = document.getElementById("speed").value;
   characterData.weight = document.getElementById("weight").value;
   characterData.size = document.getElementById("size").value;
