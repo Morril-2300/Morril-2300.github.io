@@ -352,7 +352,7 @@ function writeAttacks() {
   if (data != null && data.length != 0) {
     atkList.querySelectorAll(".attack").forEach(el => el.remove());
     data.forEach((item, i) => {
-      const row = createAttackRow(i, i === 0, item);
+      const row = createAttackRow(i, item);
       atkList.appendChild(row);
     });
   }
@@ -402,7 +402,7 @@ function writeSpells() {
   if (data != null && data.length != 0) {
     spellList.querySelectorAll(".spell").forEach(el => el.remove());
     data.forEach((item, i) => {
-      const row = createSpellRow(i, i === 0, item);
+      const row = createSpellRow(i, item);
       spellList.appendChild(row);
     });
   }
@@ -468,14 +468,21 @@ window.addEventListener("keydown", function (e) {
 
 /* auto attack row  ********************************************************************************/
 
-function createAttackRow(index, isFirst = false, data = []) {
+function appendAttackRow() {
+  const newRow = createAttackRow(attackIndex++);
+  document.getElementById("atk-list").append(newRow);
+  reindexAttackRows();
+  attachAttackEventListeners();
+  saveAttacksToStorage();
+}
+function createAttackRow(index, data = []) {
   const div = document.createElement("div");
-  div.className = "attack";
+  div.className = "attack draggable-item";
+  div.setAttribute('draggable', 'true');
 
   div.innerHTML = `
-    ${isFirst ? '<whitespace class="rm-atk"></whitespace>' :
-      '<button type="button" class="remove-atk">-</button>'}
-    <button type="button" class="add-atk">+</button>
+    <div>↕</div>
+    <button type="button" class="remove-atk">×</button>
     <input id="atk_name${index}" type="text" value="${data[0] || ''}" />
     <input id="atk_bonus${index}" type="text" value="${data[1] || ''}" />
     <input id="atk_dmg${index}" type="text" value="${data[2] || ''}" />
@@ -483,14 +490,22 @@ function createAttackRow(index, isFirst = false, data = []) {
   `;
   return div;
 }
-function createSpellRow(index, isFirst = false, data = []) {
-  const div = document.createElement("div");
-  div.className = "spell";
+function appendSpellRow() {
+  const newRow = createSpellRow(spellIndex++);
+  document.getElementById("spell-list").append(newRow);
+  reindexSpellRows();
+  attachSpellEventListeners();
+  saveSpellsToStorage();
+}
 
-  div.innerHTML = `    
-    ${isFirst ? '<whitespace class="rm-spell"></whitespace>' :
-      '<button type="button" class="remove-spell">-</button>'}
-    <button class="add-spell">+</button>
+function createSpellRow(index, data = []) {
+  const div = document.createElement("div");
+  div.className = "spell draggable-item";
+  div.setAttribute('draggable', 'true');
+
+  div.innerHTML = `
+    ↕
+    <button class="remove-spell"> × </button>
     <input class="prep" type="checkbox" id="prep_${index}"/>
     <input value="${data[ 1] || 0}" class="lvl" type="number" id="lvl_${index}"/>
     <input value="${data[ 2] ||''}" class="name" type="text" id="name_${index}"/>
@@ -525,7 +540,7 @@ function createSpellRow(index, isFirst = false, data = []) {
 }
 
 function reindexAttackRows() {
-  const rows = document.querySelectorAll("#atk-list .attack");
+  const rows = document.querySelectorAll(".atk-list .attack");
 
   rows.forEach((row, i) => {
     const inputs = row.querySelectorAll("input");
@@ -534,24 +549,6 @@ function reindexAttackRows() {
       inputs[1].id = `atk_bonus${i}`;
       inputs[2].id = `atk_dmg${i}`;
       inputs[3].id = `atk_note${i}`;
-    }
-
-    // Replace/remove first row's remove button
-    const remove = row.querySelector(".remove-atk") || row.querySelector("whitespace");
-    if (i === 0) {
-      if (remove && remove.tagName === "BUTTON") {
-        const ws = document.createElement("whitespace");
-        ws.className = "rm-atk";
-        row.replaceChild(ws, remove);
-      }
-    } else {
-      if (remove && remove.tagName === "WHITESPACE") {
-        const rm = document.createElement("button");
-        rm.className = "remove-atk";
-        rm.textContent = "-";
-        rm.type = "button";
-        row.replaceChild(rm, remove);
-      }
     }
   });
 
@@ -578,24 +575,6 @@ function reindexSpellRows() {
       inputs[11].id = `effect_${i}`;
       inputs[12].id = `notes_${i}`;
     }
-
-    // Replace/remove first row's remove button
-    const remove = row.querySelector(".remove-spell") || row.querySelector("whitespace");
-    if (i === 0) {
-      if (remove && remove.tagName === "BUTTON") {
-        const ws = document.createElement("whitespace");
-        ws.className = "rm-spell";
-        row.replaceChild(ws, remove);
-      }
-    } else {
-      if (remove && remove.tagName === "WHITESPACE") {
-        const rm = document.createElement("button");
-        rm.className = "remove-spell";
-        rm.textContent = "-";
-        rm.type = "button";
-        row.replaceChild(rm, remove);
-      }
-    }
   });
 
   spellIndex = rows.length;
@@ -603,17 +582,6 @@ function reindexSpellRows() {
 
 function attachAttackEventListeners() {
   const atkList = document.getElementById("atk-list");
-
-  atkList.querySelectorAll(".add-atk").forEach(btn => {
-    btn.onclick = () => {
-      const parentRow = btn.closest(".attack");
-      const newRow = createAttackRow(attackIndex++);
-      atkList.insertBefore(newRow, parentRow.nextSibling);
-      reindexAttackRows();
-      attachAttackEventListeners();
-      saveAttacksToStorage();
-    };
-  });
 
   atkList.querySelectorAll(".remove-atk").forEach(btn => {
     btn.onclick = () => {
@@ -630,17 +598,6 @@ function attachAttackEventListeners() {
 }
 function attachSpellEventListeners() {
   const spellList = document.getElementById("spell-list");
-
-  spellList.querySelectorAll(".add-spell").forEach(btn => {
-    btn.onclick = () => {
-      const parentRow = btn.closest(".spell");
-      const newRow = createSpellRow(spellIndex++);
-      spellList.insertBefore(newRow, parentRow.nextSibling);
-      reindexSpellRows();
-      attachSpellEventListeners();
-      saveSpellsToStorage();
-    };
-  });
 
   spellList.querySelectorAll(".remove-spell").forEach(btn => {
     btn.onclick = () => {
@@ -732,6 +689,49 @@ document.getElementById('importButton').addEventListener('change', function (eve
   };
   reader.readAsText(file);
 });
+
+// reorder
+
+const list = document.querySelectorAll('.draggable-list').forEach(list => {
+  let draggingItem = null;
+  list.addEventListener('dragstart', (e) => {
+      draggingItem = e.target;
+      console.log("drag");
+      e.target.classList.add('dragging');
+  });
+  list.addEventListener('dragend', (e) => {
+      e.target.classList.remove('dragging');
+      document.querySelectorAll('.draggable-item')
+          .forEach(item => item.classList.remove('over'));
+      draggingItem = null;
+  });
+  list.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      const draggingOverItem = getDragAfterElement(list, e.clientY);
+      document.querySelectorAll('.draggable-item').forEach
+          (item => item.classList.remove('over'));
+      if (draggingOverItem) {
+          draggingOverItem.classList.add('over');
+          list.insertBefore(draggingItem, draggingOverItem);
+      } else {
+          list.appendChild(draggingItem); 
+      }
+  });
+});
+function getDragAfterElement(container, y) {
+    const draggableElements = [...container.querySelectorAll
+        ('.draggable-item:not(.dragging)')];
+    return draggableElements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+        if (offset < 0 && offset > closest.offset) {
+            return { offset: offset, element: child };
+        } else {
+            return closest;
+        }
+    }, { offset: Number.NEGATIVE_INFINITY }).element;
+}
+
 
 /* autofit text  ********************************************************************************/
 
