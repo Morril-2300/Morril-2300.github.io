@@ -484,7 +484,6 @@ function createAttackRow(index, data = []) {
   div.setAttribute('draggable', 'true');
 
   div.innerHTML = `
-    <div></div>
     <button type="button" class="remove-atk">×</button>
     <input id="atk_name${index}" type="text" value="${data[0] || ''}" />
     <input id="atk_bonus${index}" type="text" value="${data[1] || ''}" />
@@ -507,7 +506,6 @@ function createSpellRow(index, data = []) {
   div.setAttribute('draggable', 'true');
 
   div.innerHTML = `
-    <div><div/>
     <button class="remove-spell"> × </button>
     <input class="prep" type="checkbox" id="prep_${index}"/>
     <input value="${data[ 1] || 0}" class="lvl" type="number" id="lvl_${index}"/>
