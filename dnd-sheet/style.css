@@ -1,3 +1,14 @@
+@font-face {
+    font-family: 'Nerd Fonts Symbols';
+    src: url('https://morril-2300.github.io/assets/NerdFontsSymbolsMono-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    color-scheme: light dark;
+}
 
 :root {
   color-scheme: light dark;
@@ -498,6 +509,10 @@ input.skillprof,
   vertical-align: middle;
   justify-content: center;
 }
+
+.single_def-prof > label {
+  font-family: sans-serif,'Nerd Fonts Symbols';
+} 
 
 /* === SCALABLE LIST === */
 
