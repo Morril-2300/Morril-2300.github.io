@@ -42,9 +42,10 @@ html, body {
   background-color: var(--background) !important;
   background: var(--background);
   height: 100%;
+  min-width: max-content;
 }
 
-
+/* === Input Fields === */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -110,6 +111,8 @@ input[type="checkbox"]:checked::before {
   left: 4px;
 }
 
+
+/* === Outputs and Labels ===*/
 output {
   font-family: monospace;
   width: 3ch;
@@ -133,6 +136,8 @@ label.link {
 label.link:hover {
   color: var(--link-hover);
 }
+
+/* === Header === */
 
 .title {
   font-family: sans-serif;
@@ -172,6 +177,34 @@ label.link:hover {
 .exportButton:hover {
   background-color: #29665d;
 }
+
+label.section-title {
+  font-size: larger;
+}
+
+/* === Buttons === */
+
+
+.x-button,
+.plus-button {
+  font-family: monospace;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  margin: auto;
+  background-color: var(--background);
+  color: var(--foreground);
+  border: 1px solid var(--foreground);
+  border-radius: 2px;
+}
+
+.plus-button {
+  align-self: center;
+  justify-self: center;
+  text-align: center;
+}
+
 
 /**************************************
 **************************************/
@@ -297,8 +330,7 @@ MAIN BLOCK
 
 ***********************************************************************************************/
 
-.attacks,
-.char-header {
+.box {
   padding: 10px;
   border: 1px solid #ccc;
   box-sizing: border-box;
@@ -449,60 +481,81 @@ input.skillprof,
   column-gap: 10px;
 }
 
-.inventory {
+/* === PROFICIENCIES === */
+
+.def-prof {
+  padding: 2px;
+  margin-bottom: 2px;
+  width: 100%;
   display: grid;
-  grid-template-columns: 1fr 5fr;
-  column-gap: 5px;
-  height: 100%;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
 }
 
-.currency,
-.equipment,
-.add_notes {
+.single_def-prof {
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+  justify-content: center;
+}
+
+/* === SCALABLE LIST === */
+
+.scalable-list {
   display: flex;
   flex-direction: column;
-  align-self: stretch;
-  height: 100%;
+  margin-top: 6px;
 }
 
-.currency_list {
-  border: 1px solid #888;
-  border-radius: 2px;
+.scalable-list .scalable-list-row {
+  display: grid;
+  grid-template-columns: 20px 1fr; 
+  column-gap: 10px;
+  width: 100%;
+  align-items: start; 
+}
+
+/* -- Features -- */
+.feature-row button, 
+.inventory-row button{
+  padding: 0;
+  margin-top: 1px;
+}
+
+textarea.grow {
+  resize: none; /* Disable manual resizing */
+  overflow: hidden; /* Hide scrollbars */
   box-sizing: border-box;
+}
+
+/* === INVENTORY === */
+
+.currency_list {
   padding: 2px;
   width: 100%;
-  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr) 20px;
+}
+.currency_list > label {
+  font-size: large;
 }
 
 .single_currency {
   display: grid;
-  grid-template-columns: 1fr 8fr;
+  grid-template-columns: 1fr;
   align-items: center;
+  justify-content: center;
   padding-bottom: 2px;
-  height: 19%;
-  flex: 1;
 }
-.single_currency label {
-  display: flex;
-  align-items: center;  /* vertical centering */
-  font-size: x-small;
-  height: 100%;
-  padding-right: 2px;
-}
-.single_currency input {
-  width: 50px;
-  height: 80%;
-  justify-self: right;
+.single_currency > * {
+  text-align: center;
 }
 
+/* === ATTACKS === */
 
 .attacks {
   display: grid;
   grid-template-columns: 1fr;
-}
-
-.attacks label {
-  font-size: medium;
 }
 
 .atk-list div {
@@ -523,13 +576,22 @@ input.skillprof,
 }
 
 
+
+.add_notes {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  height: 100%;
+}
+
+
+
+
+
+
 /* 
     SPELLCSATING (PAGE 2)
 */
-
-.spellcasting label.section-title {
-  font-size: larger;
-}
 
 .spellcasting-header {
   display: grid;
@@ -556,7 +618,7 @@ input.skillprof,
 .spell-header,
 .spell {
   display: grid;
-  grid-template-columns: 20px 20px 20px 5fr 1fr 1fr 20px 20px 20px 20px 20px 1fr 3fr 8fr 15px;
+  grid-template-columns: 20px 20px 20px 5fr 1fr 1fr 20px 20px 20px 20px 20px 1fr 3fr 8fr 20px;
   gap: 2px;
 }
 
@@ -578,10 +640,11 @@ input.skillprof,
 }
 
 .spell label {
-  font-size: medium;
+  margin-left: 10px;
+  font-size: large;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: right;
   height: 100%;
 }
 
@@ -589,23 +652,4 @@ input.skillprof,
 .spell-list > div > input.effect,
 .spell-list > div > input.notes {
   font-size: small;
-}
-
-.remove-atk,
-.add-atk,
-.remove-spell,
-.add-spell {
-  font-family: monospace;
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
-  align-self: center;
-  justify-self: center;
-  text-align: center;
-  padding: 0;
-  margin: auto;
-  background-color: var(--background);
-  color: var(--foreground);
-  border: 1px solid var(--foreground);
-  border-radius: 2px;
 }

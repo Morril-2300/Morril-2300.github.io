@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <header class="char-header">
+    <header class="box char-header">
       <div name="left">
         <div class="char_info">
           <div id="character">
@@ -69,11 +69,11 @@
 
     <section class="main">
       <div class="personality">
-          <div><textarea id="personality" rows="5"></textarea><label>Personality Traits</label></div>
-          <div><textarea id="ideals" rows="5"></textarea><label>Ideals</label></div>
-          <div><textarea id="bonds" rows="5"></textarea><label>Bonds</label></div>
-          <div><textarea id="flaws" rows="5"></textarea><label>Flaws</label></div>
-        </div>
+        <div><textarea id="personality" rows="5"></textarea><label>Personality Traits</label></div>
+        <div><textarea id="ideals" rows="5"></textarea><label>Ideals</label></div>
+        <div><textarea id="bonds" rows="5"></textarea><label>Bonds</label></div>
+        <div><textarea id="flaws" rows="5"></textarea><label>Flaws</label></div>
+      </div>
       <section class="attributes">
         <div class="attr-col str">
           <div class="attr">
@@ -131,13 +131,15 @@
             <output class="saving_throw" id="save_mod_int">+0</output>
           </div>
           <div class="skill"><label>Arcana </label> <input class="skillprof" value="0" type="number" id="prof_Arcana" />
-            <output class="skill" id="skill_Arcana">+0</output></div>
+            <output class="skill" id="skill_Arcana">+0</output>
+          </div>
           <div class="skill"><label>History </label> <input class="skillprof" value="0" type="number"
               id="prof_History" /> <output class="skill" id="skill_History">+0</output></div>
           <div class="skill"><label>Investigation </label> <input class="skillprof" value="0" type="number"
               id="prof_Investigation" /> <output class="skill" id="skill_Investigation">+0</output></div>
           <div class="skill"><label>Nature </label> <input class="skillprof" value="0" type="number" id="prof_Nature" />
-            <output class="skill" id="skill_Nature">+0</output></div>
+            <output class="skill" id="skill_Nature">+0</output>
+          </div>
           <div class="skill"><label>Religion </label> <input class="skillprof" value="0" type="number"
               id="prof_Religion" /> <output class="skill" id="skill_Religion">+0</output></div>
         </div>
@@ -198,74 +200,109 @@
         </div>
       </section>
 
-      <section class="attacks">
-      <div><label>Attacks & Spellcasting</label> <button type="button" class="add-atk"
-          onclick="appendAttackRow()">+</button></div>
-      <div class="atk-list draggable-list" id="atk-list">
-        <div class="atk-header">
-          <label>[×]</label>
-          <label>Name</label>
-          <label>AtkBonus/DC</label>
-          <label>Damage&Type</label>
-          <label>Notes</label>
+      <section class="box attacks">
+        <div><label class="section-title">Attacks & Spellcasting</label> <button type="button" class="plus-button"
+            onclick="appendAttackRow()">+</button></div>
+        <div class="atk-list draggable-list" id="atk-list">
+          <div class="atk-header">
+            <label>[×]</label>
+            <label>Name</label>
+            <label>AtkBonus/DC</label>
+            <label>Damage&Type</label>
+            <label>Notes</label>
+          </div>
+          <div class="attack draggable-item" draggable="true">
+            <div></div>
+            <button type="button" class="remove-atk x-button">+</button>
+            <input id="atk_name0" type="text" />
+            <input id="atk_bonus0" type="text" />
+            <input id="atk_dmg0" type="text" />
+            <input id="atk_note0" type="text" />
+          </div>
         </div>
-        <div class="attack draggable-item" draggable="true">
-          <div></div>
-          <button type="button" class="remove-atk">+</button>
-          <input id="atk_name0" type="text" />
-          <input id="atk_bonus0" type="text" />
-          <input id="atk_dmg0" type="text" />
-          <input id="atk_note0" type="text" />
-        </div>
-      </div>
-    </section>
+      </section>
 
 
       <section class="info">
-        <div class="all_features">
-          <div class="class_features">
-            <textarea id="class_features" rows="19" placeholder="Class Features, Abilities, Feats"></textarea>
-            <label>Class Features</label>
+        <div class="proficiencies">
+          <div class="box ">
+            <label class="section-title">Proficiencies</label>
+            <button class="plus-button" type="button" id="add-prof" onclick="appendProfRow()">+</button>
+            <div class="box def-prof">
+              <div class="single_def-prof"><label>Defensive:</label></div>
+              <div class="single_def-prof"><label>Light</label><input id="armor-l" type="checkbox" /></div>
+              <div class="single_def-prof"><label>Medium</label><input id="armor-m" type="checkbox" /></div>
+              <div class="single_def-prof"><label>Heavy</label><input id="armor-h" type="checkbox" /></div>
+              <div class="single_def-prof"><label>󰞀</label><input id="shield" type="checkbox" /></div>
+            </div>
+            <div id="prof-list" class="scalable-list draggable-list">
+              <div class="prof-row scalable-list-row draggable-item">
+                <button type="button" class="remove-prof x-button">×</button>
+                <textarea id="prof_input_0" rows="1" placeholder="Proficiency" class="grow"></textarea>
+              </div>
+            </div>
           </div>
-          <div class="features">
-            <textarea id="other_features" rows="19" placeholder="Background, Lineage, ... "></textarea>
-            <label>Other Features & Traits</label>
+          <div class="box inventory">
+            <div>
+              <label class="section-title">Inventory</label>
+              <button type="button" id="add-inventory-item" class="plus-button"
+                onclick="appendInventoryRow()">+</button>
+            </div>
+            <div class="currency">
+              <div class="currency_list">
+                <div class="single_currency"><input id="cp" type="text" placeholder="CP" /><label>CP</label></div>
+                <div class="single_currency"><input id="sp" type="text" placeholder="SP" /><label>SP</label></div>
+                <div class="single_currency"><input id="ep" type="text" placeholder="EP" /><label>EP</label></div>
+                <div class="single_currency"><input id="gp" type="text" placeholder="GP" /><label>GP</label></div>
+                <div class="single_currency"><input id="pp" type="text" placeholder="PP" /><label>PP</label></div>
+                <label class="link" onclick="wikidot('currency')">?</label>
+              </div>
+            </div>
+            <div class="equipment">
+              <div id="inventory-list" class="scalable-list draggable-list">
+                <div class="inventory-row scalable-list-row draggable-item">
+                  <button type="button" class="remove-inventory x-button">×</button>
+                  <textarea id="inventory_item_0" rows="1" placeholder="Item Description" class="grow"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="all_features">
+          <div class="features-list box">
+            <label class="section-title">Class Features</label>
+            <button type="button" id="add-class-feature" class="plus-button">+</button>
+            <div id="class-features-list" class="scalable-list draggable-list">
+              <div class="feature-row scalable-list-row draggable-item">
+                <button type="button" class="remove-feature x-button">×</button>
+                <textarea rows="1" id="class_feature_0" placeholder="Class Feature" class="grow"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="features-list box">
+            <label class="section-title">Other Features & Traits</label>
+            <button type="button" id="add-other-feature" class="plus-button">+</button>
+            <div id="other-features-list" class="scalable-list draggable-list">
+              <div class="feature-row scalable-list-row draggable-item">
+                <button type="button" class="remove-feature x-button">×</button>
+                <textarea rows="1" id="other_feature_0" placeholder="Other Feature" class="grow"></textarea>
+              </div>
+            </div>
           </div>
         </div>
       </section>
     </section>
 
-    <section class="proficiencies">
-      <div>
-        <textarea id="proficiencies" rows="10" placeholder="Armor, Shields, Tools and Weapons"></textarea>
-        <label>Proficiencies</label>
-      </div>
-      <div>
-        <textarea id="atk_notes" rows="10" placeholder="Extra attack/spell info..."></textarea>
-        <label>Extra Attack/Spell Info</label>
-      </div>
-    </section>
-
     <section class="notes">
-      <div class="inventory">
-        <div class="currency">
-          <div class="currency_list">
-            <div class="single_currency"><label>CP</label><input id="cp" type="text" placeholder="CP" /></div>
-            <div class="single_currency"><label>SP</label><input id="sp" type="text" placeholder="SP" /></div>
-            <div class="single_currency"><label>EP</label><input id="ep" type="text" placeholder="EP" /></div>
-            <div class="single_currency"><label>GP</label><input id="gp" type="text" placeholder="GP" /></div>
-            <div class="single_currency"><label>PP</label><input id="pp" type="text" placeholder="PP" /></div>
-          </div>
-          <label class="link" onclick="wikidot('currency')">Currency</label>
-        </div>
-        <div class="equipment">
-          <textarea id="equipment" rows="10" placeholder="All Items, Weapons, etc."></textarea>
-          <label>Equipment</label>
-        </div>
-      </div>
+
       <div class="add_notes">
-        <textarea id="add_notes" rows="10" placeholder="Allies, organizations, etc."></textarea>
+        <textarea class="grow" id="add_notes" rows="1" placeholder="Allies, organizations, etc."></textarea>
         <label>Additional Notes</label>
+      </div>
+      <div>
+        <textarea class="grow" id="atk_notes" rows="1" placeholder="Extra attack/spell info..."></textarea>
+        <label>Extra Attack/Spell Info</label>
       </div>
     </section>
   </div>
@@ -334,7 +371,7 @@
 
     <!-- Spell List (from 2014 sheet) -->
     <div class="spell-list draggable-list" id="spell-list">
-      <label class="section-title">Spell List</label> <button type="button" class="add-spell"
+      <label class="section-title">Spell List</label> <button type="button" class="plus-button"
         onclick="appendSpellRow()">+</button>
       <div class="spell-header">
         <label class="center">[×]</label>
@@ -354,7 +391,7 @@
         <label class="center"></label>
       </div>
       <div class="spell draggable-item" draggable="true">
-        <button class="remove-spell"> × </button>
+        <button class="remove-spell x-button"> × </button>
         <input class="prep" type="checkbox" id="prep_0" />
         <input class="lvl" type="number" id="lvl_0" />
         <input class="name" type="text" id="name_0" />
