@@ -18,8 +18,10 @@
         <button class="exportButton" onclick="exportCharacter()">
           Export Character
         </button>
-        <input type="file" id="importButton" accept=".json" style="display: none;" />
-        <label for="importButton" class="button-like">Import Character</label>
+        <div id="importButtonLike">
+          <input type="file" id="importButton" accept=".json" style="display: none;" />
+          <label for="importButton" class="button-like">Import Character</label>
+        </div>
       </div>
     </div>
 
@@ -27,8 +29,8 @@
       <div name="left">
         <div class="char_info">
           <div id="character">
-            <textarea rows="2" id="charName" placeholder="Character Name"></textarea>
-            <label>Character Name</label>
+            <textarea rows="2" id="charName" placeholder="Character Name & ,Pronouns"></textarea>
+            <label>Character Name & Pronouns</label>
           </div>
           <div id="class">
             <textarea rows="2" id="charClass" placeholder="Class & Subclass"></textarea>

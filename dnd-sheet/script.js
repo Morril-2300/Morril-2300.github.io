@@ -416,12 +416,13 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   document.querySelectorAll('input').forEach(input => {
-    input.addEventListener('change', getData);
+    input.addEventListener('change', () => {
+      calcAndWriteAbilities();
+      getData();
+    });
   });
   
-
   loadScalableFromStorage();
-  
   
   autoResize(document.getElementById('add_notes'));
   autoResize(document.getElementById('atk_notes'));
@@ -980,6 +981,23 @@ function downloadJSON(data = characterData, filename = "character") {
 // import
 document.getElementById('importButton').addEventListener('change', function (event) {
   const file = event.target.files[0];
+  importCharacter(file);
+});
+document.getElementById('importButtonLike').addEventListener('drop', e => {
+  e.preventDefault();
+  const file = e.dataTransfer.files[0];
+  if (file && file.type === 'application/json') {
+    importCharacter(file);
+  } else {
+    alert('Please drop a valid JSON file.');
+  }
+});
+document.getElementById('importButtonLike').addEventListener('dragover', e => {
+  e.preventDefault();
+});
+
+function importCharacter(file) {
+  
   if (!file) return;
 
   const reader = new FileReader();
@@ -1001,7 +1019,8 @@ document.getElementById('importButton').addEventListener('change', function (eve
   reader.readAsText(file);
   autoResize(document.getElementById('add_notes'));
   autoResize(document.getElementById('atk_notes'));
-});
+}
+
 
 function mergeCompatible (parsedData) {
   let data = parsedData;
