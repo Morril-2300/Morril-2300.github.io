@@ -543,7 +543,8 @@ input.skillprof,
 
 /* -- Features -- */
 .feature-row button, 
-.inventory-row button{
+.inventory-row button,
+.prof-row button {
   padding: 0;
   margin-top: 1px;
 }

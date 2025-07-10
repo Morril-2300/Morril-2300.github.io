@@ -411,7 +411,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  document.querySelectorAll('textarea[class=grow]').forEach(textarea =>{
+  document.querySelectorAll('textarea[class=grow]').forEach(textarea => {
     textarea.oninput = () => autoResize(textarea);
   });
 
