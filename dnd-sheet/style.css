@@ -474,10 +474,6 @@ input.skillprof,
   background: var(--tint-violet);
 }
 
-
-.info {
-  padding-top: 5px;
-}
 .personality{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -485,11 +481,23 @@ input.skillprof,
 }
 
 .all_features,
-.notes,
-.proficiencies {
+.notes {
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 10px;
+}
+
+/* === INFO BLOCK === */
+
+.info {
+  padding-top: 5px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 10px;
+}
+.info > .col {
+  display: flex;
+  flex-direction: column;
 }
 
 /* === PROFICIENCIES === */

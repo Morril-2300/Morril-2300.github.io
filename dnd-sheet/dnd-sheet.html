@@ -224,8 +224,8 @@
 
 
       <section class="info">
-        <div class="proficiencies">
-          <div class="box ">
+        <div class="col">
+          <div class="box">
             <label class="section-title">Proficiencies</label>
             <button class="plus-button" type="button" id="add-prof" onclick="appendProfRow()">+</button>
             <div class="box def-prof">
@@ -242,6 +242,18 @@
               </div>
             </div>
           </div>
+          <div class="features-list box">
+            <label class="section-title">Class Features</label>
+            <button type="button" id="add-class-feature" class="plus-button">+</button>
+            <div id="class-features-list" class="scalable-list draggable-list">
+              <div class="feature-row scalable-list-row draggable-item">
+                <button type="button" class="remove-feature x-button">×</button>
+                <textarea rows="1" id="class_feature_0" placeholder="Class Feature" class="grow"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
           <div class="box inventory">
             <div>
               <label class="section-title">Inventory</label>
@@ -264,19 +276,6 @@
                   <button type="button" class="remove-inventory x-button">×</button>
                   <textarea id="inventory_item_0" rows="1" placeholder="Item Description" class="grow"></textarea>
                 </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <div class="all_features">
-          <div class="features-list box">
-            <label class="section-title">Class Features</label>
-            <button type="button" id="add-class-feature" class="plus-button">+</button>
-            <div id="class-features-list" class="scalable-list draggable-list">
-              <div class="feature-row scalable-list-row draggable-item">
-                <button type="button" class="remove-feature x-button">×</button>
-                <textarea rows="1" id="class_feature_0" placeholder="Class Feature" class="grow"></textarea>
               </div>
             </div>
           </div>
